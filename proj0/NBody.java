@@ -12,11 +12,15 @@ public class NBody {
         //cosmos r
         Planet[] pp = NBody.readPlanets(filename);
         double r = NBody.readRadius(filename);
-
+//        StdDraw.enableDoubleBuffering();
+//        StdDraw.setScale(-1 * r, 1 * r);
+//        //StdDraw.clear();
+//        StdDraw.picture(0, 0, imageToDraw);
 //        NBody.drawinit(r);
 //        NBody.drawstar(pp);
         double t = 0;
-        int planetsnum = 4;
+        //venus不转问题出在这里，一开始=4 可是有5颗星球。所以还是用长度赋值稳妥。
+        int planetsnum = pp.length;
         while(t < T) {
             double[] xForces = new double[planetsnum];
             double[] yForces = new double[planetsnum];
@@ -48,7 +52,7 @@ public class NBody {
         //绘制静态
         StdDraw.enableDoubleBuffering();
         StdDraw.setScale(-1 * r, 1 * r);
-        StdDraw.clear();
+        //StdDraw.clear();
         StdDraw.picture(0, 0, imageToDraw);
     }
     private static void drawstar(Planet[] pp) {
@@ -62,7 +66,7 @@ public class NBody {
 
     public static double readRadius(String filename) {
         In in = new In(filename);
-        int firstItemInFile = in.readInt();
+        in.readInt();
         double secondItemInFile = in.readDouble();
         return secondItemInFile;
     }
