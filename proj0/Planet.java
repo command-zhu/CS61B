@@ -5,7 +5,7 @@ public class Planet {
   public double yyVel = 4; // velocity in the y direction
   public double mass = 5;
   public String imgFileName = "jupiter.gif";
-  public static final double G = 6.67e-11; // gravitational constant
+  private static final double G = 6.67e-11; // gravitational constant
 
   public Planet(double xP, double yP, double xV,
       double yV, double m, String img) {
@@ -17,9 +17,13 @@ public class Planet {
     this.imgFileName = img;
   }
 
-  public Planet() {
-  }
   public Planet(Planet p) {
+    xxPos = p.xxPos;
+    yyPos = p.yyPos;
+    xxVel = p.xxVel;
+    yyVel = p.yyVel;
+    mass = p.mass;
+    imgFileName = p.imgFileName;
   }
 
   public double calcDistance(Planet p1) {
@@ -36,8 +40,8 @@ public class Planet {
   public double calcForceExertedByX(Planet p) {
     double f = this.calcForceExertedBy(p);
     double r = this.calcDistance(p);
-    double dx = this.xxPos - p.xxPos;
-    if(dx < 0)  dx = -dx;
+    double dx = p.xxPos - this.xxPos;
+    //if(dx < 0)  dx = -dx;
     double fx = f * dx / r;
     return  fx;
   }
@@ -45,8 +49,8 @@ public class Planet {
   public double calcForceExertedByY(Planet p) {
     double f = this.calcForceExertedBy(p);
     double r = this.calcDistance(p);
-    double dy = this.yyPos - p.yyPos;
-    if(dy < 0) dy = -dy;
+    double dy = p.yyPos - this.yyPos;
+    //if(dy < 0) dy = -dy;
     double fy = f * dy / r;
     return  fy;
   }
@@ -56,7 +60,7 @@ public class Planet {
     for(Planet p : all) {
       if(this.equals(p))  continue;
       double f = this.calcForceExertedByX(p);
-      if(this.xxPos - p.xxPos > 0)  f = -f;
+      //if(this.xxPos - p.xxPos > 0)  f = -f;
       fxnet += f;
     }
     return fxnet;
@@ -67,7 +71,7 @@ public class Planet {
     for(Planet p : all) {
       if(this.equals(p))  continue;
       double f = this.calcForceExertedByY(p);
-      if(this.yyPos - p.yyPos > 0)  f = -f;
+      //if(this.yyPos - p.yyPos > 0)  f = -f;
       fynet += f;
     }
     return fynet;
@@ -80,6 +84,10 @@ public class Planet {
     this.yyVel = this.yyVel + dt * ay;
     this.xxPos = this.xxPos + dt * this.xxVel;
     this.yyPos = this.yyPos + dt * this.yyVel;
+  }
+
+  public void draw() {
+
   }
 
 }
