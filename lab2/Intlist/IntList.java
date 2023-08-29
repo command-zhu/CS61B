@@ -96,31 +96,18 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        if (A == null) return B;
+        //TODO:  fill in method
+        IntList dummyHead = new IntList(0, null);
         IntList ptrA = A;
-        IntList res = new IntList(0, null);
-        IntList ptrRes = res;
-        while (ptrA != null) {
-            ptrRes.rest = new IntList(ptrA.first, null);
-            ptrRes = ptrRes.rest;
+        IntList ptr = dummyHead;
+        while(ptrA != null) {
+            ptr.rest = new IntList(ptrA.first, null);
+            ptr = ptr.rest;
             ptrA = ptrA.rest;
         }
-        ptrRes.rest = B;
-        return res.rest;
+        ptr.rest = B;
+        return dummyHead.rest;
     }
-
-//    public static IntList catenate(IntList A, IntList B) {
-//        //TODO:  fill in method
-//        if(A == null)   return B;
-//        IntList dummyHead = new IntList(0, A);
-//        IntList ptr = dummyHead;
-//        while(ptr.rest != null) {
-//            IntList res = new IntList(ptr.rest.first, ptr.rest);
-//            ptr = res;
-//        }
-//        ptr.rest = B;
-//        return dummyHead.rest;
-//    }
 
 
     /**
